@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Go test</title>
+  <style>
+    :root {
+      --bg: #f4f1ea;
+      --panel: #fff8ef;
+      --ink: #2b2b2b;
+      --accent: #b95c2b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Georgia", "Times New Roman", serif;
+      background: linear-gradient(180deg, #f8f3ea 0%, #efe6d6 100%);
+      color: var(--ink);
+    }
+
+    .wrap {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 24px;
+      background: var(--panel);
+      border: 1px solid #e0d4c3;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      margin: 0 0 16px 0;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 110px;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #d8c9b6;
+      background: #fffdf8;
+    }
+
+    button {
+      margin-top: 8px;
+      padding: 10px 16px;
+      border: 1px solid #c07a57;
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .note {
+      padding: 14px;
+      border: 1px solid #e2d2bf;
+      margin: 12px 0;
+      background: #fffdf8;
+    }
+
+    .meta {
+      font-size: 12px;
+      color: #6f6a62;
+      margin-top: 8px;
+    }
+
+    .del {
+      margin-top: 10px;
+      background: #8f3c22;
+      border-color: #6c2b18;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>Go Блокнот для записей</h1>
+    <form action="/add" method="post">
+      <textarea name="content" placeholder="Сделайте Записать..."></textarea>
+      <div>
+        <button type="submit">Записать</button>
+      </div>
+    </form>
+
+    {{if .Notes}}
+    {{range .Notes}}
+    <div class="note">
+      <div>{{.Content}}</div>
+      <div class="meta">Запись выполнена: {{.CreatedAt.Format "02 Jan 2006 15:04"}}</div>
+      <form action="/delete" method="post">
+        <input type="hidden" name="id" value="{{.ID}}" />
+        <button class="del" type="submit">Удалить</button>
+      </form>
+    </div>
+    {{end}}
+    {{else}}
+    <p>???? ??? ???????.</p>
+    {{end}}
+  </div>
+</body>
+
+</html>
