@@ -207,3 +207,53 @@ git reset --hard HEAD~1
 ```powershell
 git pull
 ```
+
+### Pull Request (через GitHub)
+
+1. Создать ветку и сделать коммит:
+```powershell
+git checkout -b feature/имя-ветки
+git add .
+git commit -m "Описание"
+git push -u origin feature/имя-ветки
+```
+
+2. Открыть GitHub и создать Pull Request из `feature/имя-ветки` в `main`.
+
+3. После мерджа удалить ветку:
+```powershell
+git checkout main
+git pull
+git branch -d feature/имя-ветки
+```
+
+### Откат к конкретному коммиту
+
+Посмотреть историю и выбрать хеш:
+```powershell
+git log --oneline
+```
+
+Временный просмотр состояния на старом коммите (без изменений истории):
+```powershell
+git checkout <hash>
+```
+
+Вернуться обратно на main:
+```powershell
+git checkout main
+```
+
+Отменить изменения коммита, не переписывая историю (создаст новый коммит):
+```powershell
+git revert <hash>
+```
+
+### Решение конфликтов при merge
+
+1. При `git merge` возник конфликт — открыть файлы и исправить вручную.
+2. После исправления:
+```powershell
+git add .
+git commit -m "Resolve merge conflicts"
+```
